@@ -4,7 +4,16 @@
 
 - `GITLAB_BASE_URL`
 - `GITLAB_TOKEN`
-- `GITLAB_TEST_PROJECT` (project path like `group/project`)
+- `PROJECT_PATH` (project path like `group/project`)
+- `PROJECT_ENCODED` (URL-encoded project path)
+
+
+Set encoded project path before running examples:
+
+```bash
+PROJECT_PATH="group/project"
+PROJECT_ENCODED=$(python -c 'import urllib.parse,os;print(urllib.parse.quote(os.environ["PROJECT_PATH"], safe=""))')
+```
 
 ## Read examples
 
