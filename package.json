@@ -1,0 +1,12 @@
+{
+  "name": "gitlab-api-skill-ci",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:unit-thin-client": "node --test tests/thin-client.test.mjs",
+    "test:integration-gitlab": "node --test tests/gitlab-integration-examples.test.mjs",
+    "test:unit-smoke": "node --test tests/gitlab-smoke.test.mjs",
+    "test:unit": "node --test tests/thin-client.test.mjs tests/gitlab-smoke.test.mjs"
+  }
+}
