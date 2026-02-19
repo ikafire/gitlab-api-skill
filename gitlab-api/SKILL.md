@@ -45,9 +45,3 @@ Return JSON output as-is. On failure, surface `error.type`, `error.status`, and 
 
 Load `gitlab-api/references/api-examples.md` for endpoint mappings and examples.
 
-## Validation mapping
-
-All examples are covered by integration tests in `tests/gitlab-integration-examples.test.mjs`.
-
-
-For CI configuration, see `gitlab-api/references/ci-setup.md`.

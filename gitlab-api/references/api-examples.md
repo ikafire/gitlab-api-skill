@@ -1,7 +1,5 @@
 # Direct GitLab API Examples
 
-These examples map to integration tests in `tests/gitlab-integration-examples.test.mjs`.
-
 ## Prerequisites
 
 - `GITLAB_BASE_URL`
