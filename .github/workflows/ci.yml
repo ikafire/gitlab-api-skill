@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+env:
+  NODE_ENV: test
+
+jobs:
+  unit-tests:
+    name: Unit tests
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm run test:unit
+
+  integration-gitlab:
+    name: Integration (GitLab API)
+    runs-on: ubuntu-latest
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
+    env:
+      GITLAB_BASE_URL: ${{ secrets.GITLAB_BASE_URL }}
+      GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+      GITLAB_TEST_PROJECT: ${{ secrets.GITLAB_TEST_PROJECT }}
+      GITLAB_MAX_PAGES: '2'
+      GITLAB_PER_PAGE: '20'
+      GITLAB_HTTP_TRANSPORT: curl
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run GitLab integration tests
+        run: npm run test:integration-gitlab
